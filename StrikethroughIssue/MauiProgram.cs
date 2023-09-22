@@ -14,9 +14,15 @@ namespace StrikethroughIssue
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+#if IOS
+            builder.ConfigureMauiHandlers(collection =>
+            {
+                collection.AddHandler(typeof(Label), typeof(StrikethroughIssue.Handlers.StrikethroughLabelHandler));
+            });
+#endif
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();
